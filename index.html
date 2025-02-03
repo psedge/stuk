@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUK.CO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: black;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: "Open Sans", serif;
+            font-optical-sizing: auto;
+            font-weight: normal;
+            font-style: normal;
+            font-variation-settings: "wdth" 100;
+        }
+
+        #background {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .floating-image {
+            position: absolute;
+            width: 50px;
+            opacity: 0.6;
+            top: 0;
+            left: 0;
+        }
+
+        .card-container {
+            width: 80%;
+            height: 80%;
+            perspective: 1000px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.4s;
+        }
+
+        .card.flipped {
+            transform: rotateX(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            background: #fafafa;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.6);
+            backface-visibility: hidden;
+        }
+
+        .card-front {
+            position: relative;
+            display: flex;
+        }
+
+        .card-left {
+            width: 30%;
+            padding: 75px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .card-left #stuk-logo {
+            width: 200pt;
+            height: auto;
+        }
+
+        .text-container {
+            margin-top: auto;
+            margin-bottom: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .text-container span {
+            color: #333;
+        }
+
+        .card-right {
+            height: 100%;
+            margin-left: auto;
+        }
+
+        .card-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-front span {
+            display: block;
+            font-weight: normal;
+            color: #333;
+        }
+
+        #row-1 { font-size: 32pt; margin-bottom: -10px; }
+
+        #row-2 { font-size: 30pt; margin-bottom: 20px; }
+
+        #row-3 { font-size: 19pt; margin-bottom: 60px;}
+
+        #row-4 { display: inline-flex; font-size: 32pt; margin-bottom: 5px; height: 50px; }
+
+        #row-4-img { margin-top: 5px; margin-left: 15px; height: auto; }
+
+        #row-5 { margin-top: 15px; display: inline-flex; font-size: 24pt; }
+
+        #row-5 .exp { margin-left: 10px; }
+
+        .card-back {
+            transform: rotateX(180deg);
+            background-color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .card-back .mag-strip {
+            top: 10%;
+            width: 100%;
+            height: 13%;
+            background: #222;
+            position: absolute;
+            left: 0;
+        }
+
+        .card-back .text-container {
+            margin: 15% auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .card-back #stuk-advert {
+            font-size: 28pt;
+            text-align: center;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .card-back img {
+            width: 50%;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+<div id="background">
+    <img src="stuk-white.png" class="floating-image image1">
+    <img src="stuk-white.png" class="floating-image image2">
+    <img src="stuk-white.png" class="floating-image image3">
+    <img src="stuk-white.png" class="floating-image image4">
+    <img src="stuk-white.png" class="floating-image image5">
+    <img src="stuk-white.png" class="floating-image image6">
+
+    <div class="card-container" onclick="flipCard()">
+        <div class="card" id="card">
+            <div class="card-face card-front">
+                <div class="card-left">
+                    <img id="stuk-logo" src="stuk-black.png" alt="stuk logo short">
+                    <div class="text-container">
+                        <span id="row-1" class="namn">Marcus Eriksson</span>
+                        <span id="row-2" class="personnummer">960304-9842</span>
+                        <span id="row-3" class="identifier">7035 9818 5714 4279</span>
+                        <span id="row-4">
+                            <span class="annum_kod">HT 2024</span>
+                            <img id="row-4-img" src="sj.png" alt="sj">
+                        </span>
+                        <span id="row-5">GILTIGT TILL: <span class="exp" style="clear: none">2026-02-20</span></span>
+                    </div>
+                </div>
+                <div class="card-right">
+                    <img src="right-side.png" alt="generic-collaboration">
+                </div>
+            </div>
+
+            <div class="card-face card-back">
+                <div class="mag-strip"></div>
+                <div class="text-container">
+                    <span id="stuk-advert">Alla studentrabatter hittar du på <span class="bold">studentkortet.se</span> i Studentkortets app</span>
+                    <img src="stuk-black-long.png" alt="stuk logo long">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const defaultParams = {
+        typ: "sl",
+        namn: "Marcus Eriksson",
+        personnummer: "960304-9842",
+        identifer: "7035 9818 5714 4279",
+        annum_kod: "HT " +new Date().getFullYear(),
+        exp: "2026-02-20"
+    };
+
+    function flipCard() {
+        document.getElementById("card").classList.toggle("flipped");
+    }
+
+    function getQueryParam(key) {
+        const params = new URLSearchParams(window.location.search);
+        if (params.has(key)) {
+            return params.get(key);
+        }
+
+        return defaultParams[key];
+    }
+
+    function updateParams() {
+        const params = new URLSearchParams(window.location.search);
+        const card = document.getElementById("card");
+        const texts = [
+            getQueryParam("namn"),
+            getQueryParam("personnummer"),
+            getQueryParam("identifier"),
+            getQueryParam("annum_kod"),
+            getQueryParam("exp")
+        ];
+
+        params.forEach((value, key) => {
+            if (key === "typ") {
+                return;
+            }
+            card.querySelector(`.${key}`).textContent = value;
+        });
+    }
+
+    function animateFloatingImages() {
+        const speed = 0.5;
+        const images = document.querySelectorAll(".floating-image");
+
+        images.forEach(image => {
+            let x = Math.random() * (window.innerWidth - 50);
+            let y = Math.random() * (window.innerHeight - 50);
+            let angle = Math.random() * Math.PI * 2;
+            let dx = Math.cos(angle) * speed;
+            let dy = Math.sin(angle) * speed;
+
+            function move() {
+                x += dx;
+                y += dy;
+
+                if (x <= 0 || x + image.clientWidth >= window.innerWidth) { dx = -dx; }
+                if (y <= 0 || y + image.clientHeight >= window.innerHeight) { dy = -dy; }
+
+                image.style.transform = `translate(${x}px, ${y}px)`;
+                requestAnimationFrame(move);
+            }
+            move();
+        });
+    }
+
+    updateParams();
+    animateFloatingImages();
+
+    document.addEventListener("DOMContentLoaded", () => {
+        function requestFullScreen() {
+            const elem = document.documentElement; // Fullscreen the entire page
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { // Firefox
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { // IE/Edge
+                elem.msRequestFullscreen();
+            }
+        }
+
+        setTimeout(() => {
+            requestFullScreen();
+        }, 0);
+
+        // document.addEventListener("click", requestFullScreen, { once: true });
+    });
+
+</script>
+</body>
+</html>
